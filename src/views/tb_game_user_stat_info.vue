@@ -8,17 +8,14 @@
                     <el-option label="产品服" value="192.168.1.242"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="表名">
-                <el-select v-model="form.tbname" placeholder="请选择表名">
-                    <el-option label="tb_game_data_pool_record" value="tb_game_data_pool_record"></el-option>
-                    <el-option label="tb_user_pay_income_record" value="tb_user_pay_income_record"></el-option>
-                </el-select>
+            <el-form-item label="username">
+                <el-input type="text" v-model="form.username"></el-input>
             </el-form-item>
-            <el-form-item label="record_id">
-                <el-input type="text" v-model="form.record_id"></el-input>
+            <el-form-item label="game_type">
+                <el-input type="text" v-model="form.game_type"></el-input>
             </el-form-item>
-            <el-form-item label="record_index">
-                <el-input type="text" v-model="form.record_index"></el-input>
+            <el-form-item label="room_level">
+                <el-input type="text" v-model="form.room_level"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">确定</el-button>
@@ -34,15 +31,16 @@
 <script>
     import global_ from "../common/Global";
     var xmlHttp = new XMLHttpRequest();
+    var tbname = "tb_game_service_stat_info";
 
     export default {
         data() {
             return {
                 form: {
                     host: '',
-                    tbname:'',
-                    record_id:'',
-                    record_index:'',
+                    username:'',
+                    game_type:'',
+                    room_level:'',
                 }
             }
         },
@@ -50,17 +48,17 @@
             onSubmit() {
                 var ip = this.form.host;
                 if(ip=="") { alert("服务器未选择!"); return (false); }
-                var tbname = this.form.tbname;
-                if(tbname=="") { alert("表未选择!"); return (false); }
-                var param1 = this.GLOBAL.trim(this.form.record_id);
+                var username = this.form.username;
+                if(username=="") { alert("username错误!"); return (false); }
+                var param1 = this.GLOBAL.trim(this.form.game_type);
                 if (param1 == "") { alert("参数1错误!"); return (false); }
-                var param2 = this.GLOBAL.trim(this.form.record_index);
+                var param2 = this.GLOBAL.trim(this.form.room_level);
+                if (param2 == "") { alert("参数1错误!"); return (false); }
+
                 var url = "http://"+this.GLOBAL.srvIp+":"+this.GLOBAL.srvPort+"/MysqlQuery?";
-                url = url + "ip=" + ip + "&cmd=query&tbname=" + tbname + "&param1=record_id&param2=" + param1;
-                if(param2 != ""){
-                    url = url + "&param3=record_index&param4=" + param2;
-                }
-                window.console.log("memcache submit!", ip, tbname, param1, url);
+                url = url + "ip=" + ip + "&cmd=query&tbname=" + tbname + "&param1=game_type&param2=" + param1;
+                url = url + "&param3=room_level&param4=" + param2;
+                window.console.log("memcache submit!", url);
 
                 xmlHttp.onreadystatechange =  function() { global_.callback(xmlHttp);}
                 xmlHttp.open("GET", url, true);//

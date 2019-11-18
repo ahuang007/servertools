@@ -6,7 +6,7 @@
       active-text-color="#ffd04b"
       :default-active="activeIndex"
       router
-      style="min-height:100vh;width:230px;float:left">
+      style="min-height:100vh;width:240px;float:left">
       <NavMenu :navMenus="menuData"></NavMenu>
     </el-menu>
     <router-view style="margin-left:250px"></router-view>
@@ -55,7 +55,42 @@ export default {
                 name: "Mysql",
                 icon: "el-icon-edit",
                 alias: "Mysql",
-              }
+              },
+              // 三级
+              childs: [
+                {
+                  entity: {
+                    id: 41,
+                    name: "tb_game_data_pool_record",
+                    icon: "el-icon-printer",
+                    alias: "游戏数据池记录",
+                  }
+                },
+                {
+                  entity: {
+                    id: 42,
+                    name: "tb_user_pay_income_record",
+                    icon: "el-icon-printer",
+                    alias: "用户消费收支记录",
+                  }
+                },
+                {
+                  entity: {
+                    id: 43,
+                    name: "tb_game_service_stat_info",
+                    icon: "el-icon-printer",
+                    alias: "游戏房间统计信息",
+                  }
+                },
+                {
+                  entity: {
+                    id: 44,
+                    name: "tb_game_user_stat_info",
+                    icon: "el-icon-printer",
+                    alias: "游戏个人统计信息",
+                  }
+                }
+              ]
             }
           ]
         },
@@ -72,11 +107,11 @@ export default {
     };
   },
   mounted(){
-    console.log(window.location.href)
+    window.console.log(window.location.href)
     let start = window.location.href.lastIndexOf('/');
     let path = window.location.href.slice(start+1);
     this.activeIndex = path;
-    console.log(this.activeIndex)
+    window.console.log(this.activeIndex)
   }
 
 };

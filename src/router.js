@@ -37,10 +37,34 @@ export default new Router({
             import('./views/Memcache.vue')
     },
     {
-        path: '/Mysql',
-        name: 'Mysql',
+        path: '/tb_game_data_pool_record',
+        name: 'tb_game_data_pool_record',
         component: () =>
-            import('./views/Mysql.vue')
+            import('./views/tb_game_data_pool_record.vue')
+    },
+    {
+        path: '/tb_user_pay_income_record',
+        name: 'tb_user_pay_income_record',
+        component: () =>
+            import('./views/tb_user_pay_income_record.vue')
+    },
+    {
+        path: '/tb_game_service_stat_info',
+        name: 'tb_game_service_stat_info',
+        component: () =>
+            import('./views/tb_game_service_stat_info.vue')
+    },
+    {
+        path: '/tb_game_data_pool_record',
+        name: 'tb_game_data_pool_record',
+        component: () =>
+            import('./views/tb_game_data_pool_record.vue')
+    },
+    {
+        path: '/tb_game_user_stat_info',
+        name: 'tb_game_user_stat_info',
+        component: () =>
+            import('./views/tb_game_user_stat_info.vue')
     },
     {
         path: '/Manual',
